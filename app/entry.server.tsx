@@ -12,7 +12,11 @@ import { RemixServer } from "@remix-run/react";
 import isbot from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
 
+import { H } from '@highlight-run/node'
+
 const ABORT_DELAY = 5_000;
+
+H.init({projectID: '1ep60qdn'})
 
 export default function handleRequest(
   request: Request,
@@ -106,6 +110,8 @@ function handleBrowserRequest(
 
           responseHeaders.set("Content-Type", "text/html");
 
+          throw new Error("backend error")
+
           resolve(
             new Response(body, {
               headers: responseHeaders,
@@ -119,6 +125,10 @@ function handleBrowserRequest(
           reject(error);
         },
         onError(error: unknown) {
+          // TODO - improve typing
+          // H.consumeError(error, parsed?.secureSessionId, parsed?.requestId)
+          H.consumeError(error as Error)
+
           responseStatusCode = 500;
           // Log streaming rendering errors from inside the shell.  Don't log
           // errors encountered during initial shell rendering since they'll
