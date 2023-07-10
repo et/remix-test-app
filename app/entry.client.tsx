@@ -4,9 +4,19 @@
  * For more information, see https://remix.run/file-conventions/entry.client
  */
 
+import { H } from 'highlight.run';
+
 import { RemixBrowser } from "@remix-run/react";
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
+
+H.init('1ep60qdn', {
+	tracingOrigins: true,
+	networkRecording: {
+		enabled: true,
+		recordHeadersAndBody: true,
+	},
+});
 
 startTransition(() => {
   hydrateRoot(
