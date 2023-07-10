@@ -8,11 +8,8 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function Index() {
-  const forceError = () => {
-    throw new Error("oops")
-  }
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }} onClick={forceError}>
+    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
       <h1>Welcome to Remix</h1>
       <ul>
         <li>
